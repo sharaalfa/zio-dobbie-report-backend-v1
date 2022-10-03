@@ -1,0 +1,74 @@
+---
+swagger: "2.0"
+info:
+  version: "1"
+  title: "Ofd Report Backend"
+host: "127.0.0.1:8085"
+basePath: "/v1"
+tags:
+- name: "backend"
+  description: "These are the backend routes."
+produces:
+- "text/csv"
+paths:
+  /api/report-file/{pathToFile}:
+    get:
+      tags:
+      - "api"
+      operationId: "getApiReport-file-pathToFile-dateFrom-dateTo-categories-receiptDate-region-channel"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "pathToFile"
+        in: "path"
+        description: "путь к файлу roduct_names.csv"
+        required: true
+        type: "string"
+      - name: "dateFrom"
+        in: "query"
+        description: "date_from"
+        required: true
+        type: "string"
+      - name: "dateTo"
+        in: "query"
+        description: "date_to"
+        required: true
+        type: "string"
+      - name: "categories"
+        in: "query"
+        description: "Фильтр kkt_category, принимающий на вход список категорий: м\
+          ожет быть пустым или содержать любое кол-во категорий (например: FMCG, HoReCa)"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+      - name: "receiptDate"
+        in: "query"
+        description: "Признак необходимости группировки"
+        required: false
+        type: "boolean"
+        default: false
+      - name: "region"
+        in: "query"
+        description: "Признак необходимости группировки"
+        required: false
+        type: "boolean"
+        default: false
+      - name: "channel"
+        in: "query"
+        description: "channel"
+        required: false
+        type: "boolean"
+        default: false
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "file"
+        "404":
+          description: "Not Found"
+      deprecated: false
+definitions:
+  Unit:
+    type: "object"
+    description: "Unit"

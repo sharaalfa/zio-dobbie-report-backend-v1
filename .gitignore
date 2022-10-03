@@ -1,0 +1,7 @@
+target/
+.idea/
+gen/
+.bsp/
+project/project
+project/target
+
